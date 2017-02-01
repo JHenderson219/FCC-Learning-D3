@@ -1,10 +1,32 @@
 const dataset = [12, 31, 22, 17, 25, 18, 29, 14, 9];
+const w = 500;
+const h = 200;
 
-d3.select('body').selectAll('h2')
-    .data(dataset)
-    .enter()
-	.append('div')
-	.attr("class","bar")
-	.style("height", d => d*10+"px");
+const svg = d3.select('body')
+	.append("svg")	
+	.attr("width", w)
+	.attr("height", h);
+
+	svg.selectAll("rect")
+	.data(dataset)
+	.enter()
+	.append("rect")
+	.attr("width", 25)
+	.attr("height", (d) => d*3)
+	.attr('x', (d,i) => i*30)
+	.attr('y', (d) => h-d*3)
+	.attr ('fill', "navy");
+
+	svg.selectAll('text')
+		.data(dataset)
+		.enter()
+		.append('text')
+		.attr('x', (d,i) => i*30)
+		.attr('y', (d) => h-d*3-3)
+		.text(d => d)
+		.style("font-size","25px")
+		.style("fill", "red");
+
+		
 
     
