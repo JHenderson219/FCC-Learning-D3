@@ -69,7 +69,7 @@ svg.selectAll("text")
     .attr("y", (d, i) => h - d[1]);
 */
 
-const dataset = [
+ const dataset = [
                   [ 34,     78 ],
                   [ 109,   280 ],
                   [ 310,   120 ],
@@ -98,26 +98,34 @@ const dataset = [
                   .append("svg")
                   .attr("width", w)
                   .attr("height", h);
-
-    const xAxis = d3.axisBottom(xScale);
-
+    
     svg.selectAll("circle")
        .data(dataset)
        .enter()
        .append("circle")
-       // Add your code below this line
-       .attr("cx", d => xScale(d[0]))
-       .attr("cy", d => yScale(d[1]))
-       .attr("r",5);
-       
-       // Add your code above this line
-       
+       .attr("cx", (d) => xScale(d[0]))
+       .attr("cy",(d) => yScale(d[1]))
+       .attr("r", (d) => 5);
+    
     svg.selectAll("text")
        .data(dataset)
        .enter()
        .append("text")
-       .text((d) =>  (d[0] + 
- + d[1]))
-       // Add your code below this line
-       .attr("x", d => xScale(d[0]+10))
-       .attr("y", d => yScale(d[1]));
+       .text((d) =>  (d[0] + "," + d[1]))
+       .attr("x", (d) => xScale(d[0] + 10))
+       .attr("y", (d) => yScale(d[1]))
+    
+    const xAxis = d3.axisBottom(xScale);
+    const yAxis = d3.axisLeft(yScale);
+    
+    svg.append("g")
+       .attr("transform", "translate(0," + (h - padding) + ")")
+       .call(xAxis);
+    
+    // Add your code below this line
+    svg.append("g")
+       .attr("transform", "translate("+ (w - padding) +",0)")
+       .call(yAxis);
+    
+    // Add your code above this line
+  
