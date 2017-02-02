@@ -7,10 +7,13 @@ body{
 }
 
   .bar:hover {
-  	fill:brown;
+  	fill: red
   }
 
 
-  rect{
+rect{
   	margin: 2px;
+  }
+circle{
+	background-color: blue;
   }
