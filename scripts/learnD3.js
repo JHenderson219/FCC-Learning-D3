@@ -70,32 +70,34 @@ svg.selectAll("text")
 */
 
  const dataset = [
-                  [ 34,     78 ],
-                  [ 109,   280 ],
-                  [ 310,   120 ],
-                  [ 79,   411 ],
-                  [ 420,   220 ],
-                  [ 233,   145 ],
-                  [ 333,   96 ],
-                  [ 222,    333 ],
-                  [ 78,    320 ],
-                  [ 21,   123 ]
+                  [ 50,     25],
+                  [ 100,   50 ],
+                  [ 150,   75 ],
+                  [ 200,   100 ],
+                  [ 250,   125 ],
+                  [ 300,   150 ],
+                  [ 350,   175 ],
+                  [ 400,    200 ],
+                  [ 450,    225 ],
+                  [ 500,   250 ]
                 ];
-    
-    const w = 500;
-    const h = 500;
+
+const data2 = [50,100,150, 200, 250, 300, 350, 400, 450, 500];
+   	//Constants for Width, Height, and padding for the SVG area 
+    const w = document.getElementById('chart').offsetWidth;
+    const h = document.getElementById('chart').offsetHeight;
     const padding = 60;
     
+
     const xScale = d3.scaleLinear()
                      .domain([0, d3.max(dataset, (d) => d[0])])
                      .range([padding, w - padding]);
     
     const yScale = d3.scaleLinear()
-                     .domain([0, d3.max(dataset, (d) => d[1])])
+                     .domain([0, d3.max(dataset, (d) => d[0])])
                      .range([h - padding, padding]);
     
-    const svg = d3.select("body")
-                  .append("svg")
+    const svg = d3.select("svg")
                   .attr("width", w)
                   .attr("height", h);
     
@@ -128,4 +130,23 @@ svg.selectAll("text")
        .call(yAxis);
     
     // Add your code above this line
-  
+  	/*svg.selectAll("line")
+  		.data(dataset)
+  		.enter()
+  		.append("line")
+  		.attr("x1", d => d[0])
+  		.attr("x2", 100 )
+  		.attr("y1", d => d[1])
+  		.attr("y2", 100)
+  		.attr("stroke-width",2)
+  		.attr("stroke", "black");*/
+
+  	const lineFunction = d3.line()
+  							.x(d => {return xScale(d[0])})
+  							.y(d => {return  yScale(d[1])})
+
+  	svg.append("path")
+  		.attr("d", lineFunction(dataset))
+  		.attr("stroke", "blue")
+  		.attr("stroke-width", 2)
+  		.attr("fill","none")
