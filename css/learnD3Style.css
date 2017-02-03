@@ -6,14 +6,9 @@ body{
 	text-align: center;
 }
 
-  .bar:hover {
-  	fill: red
-  }
-
-
-rect{
-  	margin: 2px;
-  }
-circle{
-	background-color: blue;
-  }
+.chartHolder{
+	width: 80%;
+	background-color: grey;
+	margin: auto;
+	min-height: 500px;
+}
